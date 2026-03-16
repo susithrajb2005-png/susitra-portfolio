@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Susithra J B — Web Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:   #0c1730;
+  --blue:   #2563eb;
+  --sky:    #dbeafe;
+  --white:  #ffffff;
+  --off:    #f8faff;
+  --border: #e2e8f4;
+  --txt:    #0c1730;
+  --body:   #475569;
+  --muted:  #94a3b8;
+  --green:  #16a34a;
+  --ff:     'DM Sans',sans-serif;
+  --serif:  'DM Serif Display',serif;
+  --mono:   'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--txt);font-family:var(--ff);overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--off)}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
+
+/* ── NAV ─────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 64px;height:68px;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-mono{
+  width:38px;height:38px;border-radius:10px;background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:.95rem;color:#fff;
+}
+.nav-name{font-weight:700;font-size:.95rem;color:var(--navy)}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{
+  font-family:var(--mono);font-size:.67rem;letter-spacing:.05em;
+  color:var(--body);text-decoration:none;
+  padding:8px 14px;border-radius:8px;transition:all .2s;
+}
+.nav-links a:hover{color:var(--blue);background:var(--sky)}
+.nav-hire{background:var(--navy)!important;color:#fff!important;font-weight:600!important;border-radius:8px!important}
+.nav-hire:hover{background:var(--blue)!important;color:#fff!important}
+
+/* ── HERO ────────────────────────────── */
+#home{
+  min-height:100vh;
+  position:relative;
+  display:flex;align-items:center;
+  padding-top:68px;
+  overflow:hidden;
+}
+
+/* Photo background — right side */
+.hero-photo-bg{
+  position:absolute;
+  top:0;right:0;bottom:0;
+  width:52%;
+  z-index:0;
+}
+/* Replace the src below with your actual photo */
+.hero-photo-bg img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  display:block;
+}
+/* Photo placeholder (shown when no image) */
+.hero-photo-bg .photo-placeholder{
+  width:100%;height:100%;
+  background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 40%,#0ea5e9 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+}
+.photo-placeholder-icon{font-size:4rem;opacity:.4}
+.photo-placeholder-txt{font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;line-height:1.8}
+
+/* dark overlay on photo for text readability */
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(
+    105deg,
+    var(--navy) 0%,
+    var(--navy) 38%,
+    rgba(12,23,48,.85) 55%,
+    rgba(12,23,48,.3) 75%,
+    transparent 100%
+  );
+}
+
+/* dot grid */
+.hero-dots{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:36px 36px;
+}
+
+/* content */
+.hero-content{
+  position:relative;z-index:3;
+  padding:0 64px;
+  max-width:740px;
+}
+
+/* "Aspiring Web Developer" small label */
+.h-role-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:.72rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);
+  margin-bottom:20px;
+  animation:up .6s .1s both;
+}
+.h-role-label .dot{
+  width:6px;height:6px;border-radius:50%;background:#4ade80;
+  box-shadow:0 0 8px #4ade80;animation:blink 2.5s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* BIG BOLD NAME */
+.h-bigname{
+  font-family:var(--serif);
+  font-size:clamp(4.5rem,10vw,9rem);
+  font-weight:400;
+  line-height:.9;
+  letter-spacing:-.03em;
+  color:#fff;
+  margin-bottom:24px;
+  animation:up .8s .2s both;
+}
+.h-bigname .first{display:block;font-style:normal}
+.h-bigname .last{
+  display:block;font-style:italic;
+  color:#93c5fd;
+}
+
+/* subtitle */
+.h-subtitle{
+  font-size:1.05rem;line-height:1.8;
+  color:rgba(255,255,255,.6);
+  max-width:400px;margin-bottom:44px;
+  animation:up .7s .38s both;
+}
+.h-subtitle strong{color:rgba(255,255,255,.9);font-weight:600}
+
+/* buttons */
+.h-btns{
+  display:flex;gap:12px;flex-wrap:wrap;
+  animation:up .7s .52s both;
+}
+.btn-solid{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;color:var(--navy);
+  font-weight:700;font-size:.88rem;
+  padding:13px 28px;border-radius:10px;
+  text-decoration:none;transition:all .25s;
+  box-shadow:0 4px 20px rgba(0,0,0,.25);
+}
+.btn-solid:hover{background:var(--sky);transform:translateY(-2px)}
+.btn-outline-w{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:#fff;font-weight:500;font-size:.88rem;
+  padding:12px 28px;border-radius:10px;text-decoration:none;
+  border:1.5px solid rgba(255,255,255,.3);transition:all .25s;
+}
+.btn-outline-w:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.6);transform:translateY(-2px)}
+
+/* scroll cue */
+.h-scroll{
+  position:absolute;bottom:36px;left:64px;z-index:3;
+  display:flex;align-items:center;gap:10px;
+  animation:up .6s 1s both;
+}
+.h-scroll-line{width:36px;height:1.5px;background:rgba(255,255,255,.25)}
+.h-scroll-txt{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;color:rgba(255,255,255,.3);text-transform:uppercase}
+
+/* bottom curve */
+#home::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:72px;
+  background:var(--white);clip-path:ellipse(55% 100% at 50% 100%);
+  z-index:4;
+}
+
+/* ── SECTIONS COMMON ─────────────────── */
+section{padding:100px 64px;position:relative}
+.wrap{max-width:1160px;margin:0 auto}
+.sec-label{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--blue);
+  display:flex;align-items:center;gap:10px;margin-bottom:12px;
+}
+.sec-label::before{content:'';width:22px;height:1.5px;background:var(--blue)}
+h2.sec-title{
+  font-family:var(--serif);font-size:clamp(2rem,3.8vw,3rem);
+  font-weight:400;line-height:1.1;color:var(--navy);
+  margin-bottom:10px;letter-spacing:-.02em;
+}
+h2.sec-title em{font-style:italic;color:var(--blue)}
+.sec-sub{font-size:.97rem;color:var(--body);line-height:1.75;margin-bottom:54px;max-width:500px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s,transform .65s}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── ABOUT ───────────────────────────── */
+#about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.about-quote{
+  font-family:var(--serif);font-size:1.3rem;font-style:italic;
+  color:var(--navy);line-height:1.5;
+  border-left:3px solid var(--blue);padding-left:20px;margin-bottom:22px;
+}
+.about-p{font-size:.97rem;line-height:1.85;color:var(--body);margin-bottom:12px}
+.about-p strong{color:var(--navy);font-weight:600}
+.info-table{background:var(--off);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(15,28,63,.04)}
+.irow{display:flex;justify-content:space-between;align-items:center;padding:15px 22px;border-bottom:1px solid var(--border);transition:background .2s}
+.irow:last-child{border-bottom:none}
+.irow:hover{background:var(--sky)}
+.ikey{font-family:var(--mono);font-size:.59rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.ival{font-size:.87rem;font-weight:600;color:var(--txt)}
+.ival.live{color:var(--green);display:flex;align-items:center;gap:6px}
+.ival.live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
+
+/* ── SKILLS ──────────────────────────── */
+#skills{background:var(--off);border-top:1px solid var(--border)}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sk-card{
+  background:var(--white);border:1.5px solid var(--border);
+  border-radius:16px;padding:32px 28px;transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.sk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--navy);transform:scaleX(0);transition:transform .35s;transform-origin:left}
+.sk-card:hover{transform:translateY(-6px);border-color:var(--blue);box-shadow:0 12px 40px rgba(37,99,235,.1)}
+.sk-card:hover::before{transform:scaleX(1)}
+.sk-icon{width:48px;height:48px;border-radius:12px;margin-bottom:18px;
+  background:var(--sky);border:1.5px solid #bfdbfe;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.sk-cat{font-family:var(--mono);font-size:.57rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
+.sk-name{font-weight:700;font-size:1.05rem;color:var(--navy);margin-bottom:14px}
+.sk-list{display:flex;flex-direction:column;gap:8px}
+.sli{font-size:.84rem;color:var(--body);display:flex;align-items:center;gap:8px}
+.sli::before{content:'→';color:var(--blue);font-size:.75rem;font-weight:700;flex-shrink:0}
+
+/* ── PROJECTS ────────────────────────── */
+#projects{background:var(--white)}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.proj-card{
+  background:var(--off);border:1.5px solid var(--border);
+  border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s;
+}
+.proj-card:hover{transform:translateY(-8px);border-color:var(--blue);box-shadow:0 20px 60px rgba(37,99,235,.1)}
+.proj-num-bg{position:absolute;top:20px;right:24px;
+  font-family:var(--serif);font-size:5rem;font-weight:400;
+  color:rgba(12,23,48,.05);line-height:1;user-select:none}
+.proj-tag{display:inline-flex;align-items:center;gap:6px;
+  background:var(--sky);border:1px solid #bfdbfe;
+  border-radius:100px;padding:4px 13px;
+  font-family:var(--mono);font-size:.6rem;color:var(--blue);
+  letter-spacing:.07em;margin-bottom:16px}
+.proj-card h3{font-family:var(--serif);font-size:1.5rem;font-weight:400;
+  color:var(--navy);margin-bottom:12px;line-height:1.3}
+.proj-card p{font-size:.88rem;line-height:1.78;color:var(--body);margin-bottom:22px}
+.proj-stack{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+.ptag{font-family:var(--mono);font-size:.57rem;padding:4px 10px;
+  border-radius:6px;border:1px solid var(--border);
+  color:var(--muted);background:var(--white);text-transform:uppercase;letter-spacing:.06em}
+.proj-link{display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:.68rem;color:var(--blue);
+  font-weight:500;text-decoration:none;letter-spacing:.05em;transition:gap .2s,color .2s}
+.proj-link:hover{gap:10px;color:var(--navy)}
+
+/* ── EDUCATION ───────────────────────── */
+#education{background:var(--navy);padding:100px 64px}
+.edu-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;overflow:hidden;display:grid;grid-template-columns:1fr 220px;
+}
+.edu-left{padding:52px 52px 52px 56px;position:relative}
+.edu-accent{position:absolute;top:0;left:0;bottom:0;width:4px;background:#3b82f6}
+.edu-degree{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:400;color:#fff;margin-bottom:8px;line-height:1.2}
+.edu-degree em{font-style:italic;color:#93c5fd}
+.edu-school{font-family:var(--mono);font-size:.7rem;color:rgba(255,255,255,.5);
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
+.edu-desc{font-size:.95rem;color:rgba(255,255,255,.6);line-height:1.82;margin-bottom:26px}
+.edu-tags{display:flex;flex-wrap:wrap;gap:8px}
+.etag{font-family:var(--mono);font-size:.6rem;padding:5px 13px;border-radius:7px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.65);letter-spacing:.06em;text-transform:uppercase}
+.edu-right{
+  background:rgba(255,255,255,.04);border-left:1px solid rgba(255,255,255,.08);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+}
+.edu-yr{font-family:var(--serif);font-size:5rem;font-weight:400;color:#93c5fd;line-height:1;font-style:italic}
+.edu-yr-sub{font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.35);
+  letter-spacing:.14em;text-transform:uppercase;text-align:center;margin-bottom:16px}
+.edu-badge{font-size:2.4rem}
+.edu-badge-sub{font-family:var(--mono);font-size:.58rem;color:rgba(255,255,255,.3);
+  letter-spacing:.1em;text-transform:uppercase;text-align:center}
+
+/* ── CONTACT ─────────────────────────── */
+#contact{background:var(--off);border-top:1px solid var(--border)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.contact-hed{font-family:var(--serif);font-size:clamp(2rem,3.8vw,3rem);
+  font-weight:400;color:var(--navy);margin-bottom:14px;line-height:1.1}
+.contact-hed em{font-style:italic;color:var(--blue)}
+.contact-sub{font-size:.97rem;color:var(--body);line-height:1.75;margin-bottom:36px}
+.contact-items{display:flex;flex-direction:column;gap:12px}
+.clink{
+  display:flex;align-items:center;gap:16px;
+  background:var(--white);border:1.5px solid var(--border);
+  border-radius:14px;padding:16px 20px;text-decoration:none;color:var(--navy);transition:all .25s;
+}
+.clink:hover{border-color:var(--blue);transform:translateX(8px);box-shadow:0 4px 20px rgba(37,99,235,.08)}
+.clink-ico{width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:var(--sky);border:1px solid #bfdbfe;
+  display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.clink-l{font-family:var(--mono);font-size:.57rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.clink-v{font-size:.87rem;font-weight:600;color:var(--navy)}
+
+/* ── FOOTER ──────────────────────────── */
+footer{background:var(--navy);padding:28px 64px;
+  display:flex;justify-content:space-between;align-items:center}
+.foot-brand{display:flex;align-items:center;gap:10px}
+.foot-mono{width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:.85rem;color:#93c5fd}
+.foot-name{color:rgba(255,255,255,.8);font-weight:600;font-size:.9rem}
+.foot-copy{font-family:var(--mono);font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
+
+/* ── ANIMATIONS ──────────────────────── */
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── RESPONSIVE ──────────────────────── */
+@media(max-width:1024px){
+  nav{padding:0 32px}
+  section,#education,#contact{padding:80px 32px}
+  .hero-photo-bg{width:45%}
+  .hero-content{padding:0 32px}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .edu-card{grid-template-columns:1fr}
+  .edu-right{border-left:none;border-top:1px solid rgba(255,255,255,.08);flex-direction:row;gap:20px;padding:28px 40px}
+  .proj-grid{grid-template-columns:1fr}
+  footer{padding:22px 32px}
+}
+@media(max-width:700px){
+  nav{padding:0 20px}
+  .nav-links li:not(:last-child){display:none}
+  .hero-photo-bg{display:none}
+  .h-bigname{font-size:clamp(3.5rem,14vw,6rem)}
+  section,#education,#contact{padding:64px 22px}
+  .skills-grid{grid-template-columns:1fr}
+  .edu-right{flex-direction:column;align-items:flex-start}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:18px 22px}
+  .h-scroll{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-brand">
+    <div class="nav-mono">SJ</div>
+    <span class="nav-name">Susithra J B</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact" class="nav-hire">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+
+  <!-- BACKGROUND PHOTO — replace src with your image path -->
+<div class="hero-photo-bg">
+    <!-- Replace the file name with your image name -->
+    <img src="IMG-20241024-WA0010.jpg" alt="My Photo">
+<
+    <div class="photo-placeholder">
+      <div class="photo-placeholder-icon">📸</div>
+      <div class="photo-placeholder-txt">Upload your photo<br>to appear here</div>
+    </div>
+  </div>
+
+  <!-- gradient overlay -->
+  <div class="hero-overlay"></div>
+  <!-- dot grid -->
+  <div class="hero-dots"></div>
+
+  <!-- CONTENT -->
+  <div class="hero-content">
+    <div class="h-role-label">
+      <span class="dot"></span>
+      Aspiring Web Developer
+    </div>
+
+    <h1 class="h-bigname">
+      <span class="first">SUSITHRA</span>
+      <span class="last">J B</span>
+    </h1>
+
+    <p class="h-subtitle">
+      Passionate about <strong>programming & web development</strong>.
+      B.E Student at NSCET, building modern and user-friendly websites.
+    </p>
+
+    <div class="h-btns">
+      <a href="#projects" class="btn-solid">View Projects →</a>
+      <a href="#contact" class="btn-outline-w">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="h-scroll">
+    <div class="h-scroll-line"></div>
+    <span class="h-scroll-txt">Scroll Down</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="sec-label">About Me</div>
+        <h2 class="sec-title">Hello! I'm <em>Susithra JB.</em></h2>
+        <p class="about-quote">"Passionate about building modern, user-friendly websites and contributing to innovative tech projects."</p>
+        <p class="about-p">Currently pursuing <strong>B.E (3rd Year)</strong> at Nadar Saraswathi College of Engineering and Technology.</p>
+        <p class="about-p">I have a strong interest in <strong>programming and modern web technologies</strong>. I enjoy learning new tools and developing creative solutions.</p>
+        <p class="about-p">My goal is to become a professional <strong>Web Developer</strong> and contribute to software projects that make a real impact.</p>
+      </div>
+      <div class="info-table reveal" style="transition-delay:.15s">
+        <div class="irow"><span class="ikey">Full Name</span><span class="ival">Susithra J B</span></div>
+        <div class="irow"><span class="ikey">Degree</span><span class="ival">B.E Engineering</span></div>
+        <div class="irow"><span class="ikey">Year</span><span class="ival">3rd Year · Current</span></div>
+        <div class="irow"><span class="ikey">College</span><span class="ival">NSCET</span></div>
+        <div class="irow"><span class="ikey">Phone</span><span class="ival">8248569316</span></div>
+        <div class="irow"><span class="ikey">Email</span><span class="ival">susithrajb@gmail.com</span></div>
+        <div class="irow"><span class="ikey">Status</span><span class="ival live">Open to Opportunities</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-label reveal">Skills</div>
+    <h2 class="sec-title reveal">My <em>Tech Stack.</em></h2>
+    <p class="sec-sub reveal">Technologies I work with to build responsive, modern web applications.</p>
+    <div class="skills-grid">
+      <div class="sk-card reveal">
+        <div class="sk-icon">🌐</div>
+        <div class="sk-cat">Frontend</div>
+        <div class="sk-name">Web Design</div>
+        <div class="sk-list">
+          <span class="sli">HTML5 — Semantic Markup</span>
+          <span class="sli">CSS3 — Layouts & Animations</span>
+          <span class="sli">Responsive Design</span>
+        </div>
+      </div>
+      <div class="sk-card reveal" style="transition-delay:.1s">
+        <div class="sk-icon">⚙️</div>
+        <div class="sk-cat">Development</div>
+        <div class="sk-name">Full Stack Dev</div>
+        <div class="sk-list">
+          <span class="sli">Full Stack Development</span>
+          <span class="sli">Web Applications</span>
+          <span class="sli">Team Collaboration</span>
+        </div>
+      </div>
+      <div class="sk-card reveal" style="transition-delay:.2s">
+        <div class="sk-icon">☁️</div>
+        <div class="sk-cat">Technology</div>
+        <div class="sk-name">Cloud Computing</div>
+        <div class="sk-list">
+          <span class="sli">Cloud Platforms</span>
+          <span class="sli">Deployment Concepts</span>
+          <span class="sli">Infrastructure Basics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-label reveal">Projects</div>
+    <h2 class="sec-title reveal">Featured <em>Work.</em></h2>
+    <p class="sec-sub reveal">Projects built through engineering coursework and hackathon participation.</p>
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <div class="proj-num-bg">01</div>
+        <div class="proj-tag">🔬 Engineering · Healthcare</div>
+        <h3>Biomedical Implant &amp; Prosthetic Engineering</h3>
+        <p>A project focused on biomedical implant design and prosthetic engineering concepts to improve healthcare technology and patient outcomes.</p>
+        <div class="proj-stack">
+          <span class="ptag">Biomedical</span><span class="ptag">Engineering</span>
+          <span class="ptag">Healthcare</span><span class="ptag">Design</span>
+        </div>
+        <a href="#" class="proj-link">View Project →</a>
+      </div>
+      <div class="proj-card reveal" style="transition-delay:.15s">
+        <div class="proj-num-bg">02</div>
+        <div class="proj-tag">🏆 Hackathon · Innovation</div>
+        <h3>Hackathon Projects</h3>
+        <p>Participated in hackathons and developed innovative solutions for real-world problems through teamwork and creative thinking under pressure.</p>
+        <div class="proj-stack">
+          <span class="ptag">Hackathon</span><span class="ptag">Teamwork</span>
+          <span class="ptag">Innovation</span><span class="ptag">Problem Solving</span>
+        </div>
+        <a href="#" class="proj-link">View Details →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap">
+    <div class="sec-label reveal" style="color:#93c5fd">
+      <span style="background:#93c5fd;width:22px;height:1.5px;display:block"></span>
+      Education
+    </div>
+    <h2 class="sec-title reveal" style="color:#fff;font-family:'DM Serif Display',serif;font-weight:400">
+      Academic <em style="color:#93c5fd">Background.</em>
+    </h2>
+    <p class="sec-sub reveal" style="color:rgba(255,255,255,.5)">Building strong foundations to become a professional developer.</p>
+    <div class="edu-card reveal">
+      <div class="edu-left">
+        <div class="edu-accent"></div>
+        <div class="edu-degree">Bachelor of Engineering <em>(B.E)</em></div>
+        <div class="edu-school">Nadar Saraswathi College of Engineering and Technology</div>
+        <p class="edu-desc">Currently in my <strong style="color:rgba(255,255,255,.85)">3rd Year</strong>, focusing on programming, web technologies, and modern software development. Active hackathon participant and team contributor.</p>
+        <div class="edu-tags">
+          <span class="etag">Programming</span><span class="etag">Web Dev</span>
+          <span class="etag">Cloud Computing</span><span class="etag">Full Stack</span><span class="etag">Hackathons</span>
+        </div>
+      </div>
+      <div class="edu-right">
+        <div class="edu-yr">3rd</div>
+        <div class="edu-yr-sub">Year · Current</div>
+        <div class="edu-badge">🎓</div>
+        <div class="edu-badge-sub">B.E Engineering</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="sec-label">Contact</div>
+        <h2 class="contact-hed">Let's work<br><em>together.</em></h2>
+        <p class="contact-sub">I'm open to internships, collaborative projects, and new learning opportunities. Don't hesitate to reach out!</p>
+        <a href="mailto:susithrajb@gmail.com" class="btn-solid" style="background:var(--navy);color:#fff;box-shadow:0 4px 20px rgba(12,23,48,.2)">Send an Email →</a>
+      </div>
+      <div class="contact-items reveal" style="transition-delay:.15s">
+        <a href="tel:8248569316" class="clink">
+          <div class="clink-ico">📞</div>
+          <div><div class="clink-l">Phone</div><div class="clink-v">8248569316</div></div>
+        </a>
+        <a href="mailto:susithrajb@gmail.com" class="clink">
+          <div class="clink-ico">✉️</div>
+          <div><div class="clink-l">Email</div><div class="clink-v">susithrajb@gmail.com</div></div>
+        </a>
+        <a href="https://linkedin.com/in/susithra-jb" target="_blank" class="clink">
+          <div class="clink-ico">💼</div>
+          <div><div class="clink-l">LinkedIn</div><div class="clink-v">Susithra JB</div></div>
+        </a>
+        <div class="clink" style="opacity:.38;pointer-events:none">
+          <div class="clink-ico">📂</div>
+          <div><div class="clink-l">GitHub</div><div class="clink-v" style="font-size:.8rem;color:var(--muted)">Add your GitHub link</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">
+    <div class="foot-mono">SJ</div>
+    <span class="foot-name">Susithra J B</span>
+  </div>
+  <div class="foot-copy">© 2026 · All rights reserved</div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: .1, rootMargin: '0px 0px -28px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
